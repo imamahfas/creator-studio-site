@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creator Studio DBC</title><style>
+:root{--ink:#1a1a2e;--accent:#2E86AB}
+*{box-sizing:border-box}body{font-family:-apple-system,Segoe UI,Arial,sans-serif;margin:0;color:var(--ink);line-height:1.6;background:#fafbfc}
+header{background:var(--ink);color:#fff;padding:28px 20px}header div,main,footer{max-width:760px;margin:0 auto;padding:0 20px}
+header h1{margin:0;font-size:28px}header p{margin:6px 0 0;opacity:.85}
+main{padding-top:24px;padding-bottom:24px}section{background:#fff;border:1px solid #e6e9ee;border-radius:12px;padding:20px;margin:18px 0}
+h2{margin-top:0;font-size:20px}ol,ul{padding-left:22px}
+.btn{display:inline-block;background:#fe2c55;color:#fff;border:0;border-radius:8px;padding:12px 22px;font-size:16px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.5;cursor:not-allowed}code{background:#eef1f5;padding:2px 6px;border-radius:4px;font-size:90%}
+.ok{color:#0a7a3d;font-weight:600}.warn{color:#b45309}footer{padding-bottom:40px;font-size:13px;color:#777}a{color:var(--accent)}
+</style></head><body>
+<header><div><h1>Creator Studio DBC</h1><p>A personal tool that sends the owner's own original short videos to the owner's own TikTok inbox as drafts.</p></div></header>
+<main>
+<section><h2>Connect your TikTok account</h2>
+<p>The owner connects their own TikTok account once through TikTok Login Kit. The app then reads only the account's display name and open ID, and can upload videos to that account's inbox.</p>
+<button class="btn" id="connect">Connect TikTok</button>
+<p id="status" class="warn"></p>
+<p style="font-size:14px">Requested permissions: <code>user.info.basic</code> (display name, open ID) and <code>video.upload</code> (upload videos to the inbox as drafts).</p></section>
+<section><h2>How it works</h2><ol>
+<li>The owner publishes an original short video on another platform.</li>
+<li>The app uploads the same video file to the owner's TikTok inbox as a <b>draft</b> (Content Posting API, Upload, <code>FILE_UPLOAD</code> source).</li>
+<li>The owner opens the TikTok notification, reviews the draft, adds the caption and taps <b>Post</b> in the TikTok app.</li></ol>
+<p><b>Nothing is published automatically.</b> There is no Direct Post, no scheduling, and no access to other users' data.</p></section>
+<section><h2>Products and scopes used</h2><ul>
+<li><b>Login Kit</b> &mdash; scope <code>user.info.basic</code></li>
+<li><b>Content Posting API (Upload)</b> &mdash; scope <code>video.upload</code></li></ul></section>
+<section><h2>Content</h2><p>Videos are the owner's original short stories and facts. AI assistance (voice and animation) and affiliate relationships are disclosed in the captions where applicable.</p></section>
+</main>
+<footer><p><a href="terms.html">Terms of Service</a> &middot; <a href="privacy.html">Privacy Policy</a></p><p>Creator Studio &mdash; a personal project, not a commercial product or public service.</p></footer>
+<script>
+// TikTok client key is public (the client SECRET is never placed on this site).
+var CLIENT_KEY = "REPLACE_WITH_CLIENT_KEY";
+var redirect = location.origin + location.pathname.replace(/[^\/]*$/, "") + "callback.html";
+var btn = document.getElementById("connect"), st = document.getElementById("status");
+if (CLIENT_KEY.indexOf("REPLACE") === 0) { btn.disabled = true; st.textContent = "Not configured yet."; }
+btn.addEventListener("click", function () {
+  var state = Math.random().toString(36).slice(2); sessionStorage.setItem("tt_state", state);
+  location.href = "https://www.tiktok.com/v2/auth/authorize/?client_key=" + encodeURIComponent(CLIENT_KEY) +
+    "&scope=" + encodeURIComponent("user.info.basic,video.upload") + "&response_type=code&redirect_uri=" +
+    encodeURIComponent(redirect) + "&state=" + state;
+});
+</script></body></html>

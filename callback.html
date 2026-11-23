@@ -1,1 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Authorized</title><style>body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;line-height:1.6;color:#222}</style></head><body><h1>Authorization received</h1><p>You can close this page and return to the terminal.</p></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TikTok connection - Creator Studio DBC</title><style>
+:root{--ink:#1a1a2e;--accent:#2E86AB}
+*{box-sizing:border-box}body{font-family:-apple-system,Segoe UI,Arial,sans-serif;margin:0;color:var(--ink);line-height:1.6;background:#fafbfc}
+header{background:var(--ink);color:#fff;padding:28px 20px}header div,main,footer{max-width:760px;margin:0 auto;padding:0 20px}
+header h1{margin:0;font-size:28px}header p{margin:6px 0 0;opacity:.85}
+main{padding-top:24px;padding-bottom:24px}section{background:#fff;border:1px solid #e6e9ee;border-radius:12px;padding:20px;margin:18px 0}
+h2{margin-top:0;font-size:20px}ol,ul{padding-left:22px}
+.btn{display:inline-block;background:#fe2c55;color:#fff;border:0;border-radius:8px;padding:12px 22px;font-size:16px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.5;cursor:not-allowed}code{background:#eef1f5;padding:2px 6px;border-radius:4px;font-size:90%}
+.ok{color:#0a7a3d;font-weight:600}.warn{color:#b45309}footer{padding-bottom:40px;font-size:13px;color:#777}a{color:var(--accent)}
+</style></head><body>
+<header><div><h1>Creator Studio DBC</h1><p>TikTok connection</p></div></header>
+<main><section id="box"><h2 id="title">Checking...</h2><p id="msg"></p>
+<button class="btn" id="copy" style="display:none">Copy authorization link</button>
+<p style="margin-top:18px"><a href="index.html">&larr; Back to Creator Studio DBC</a></p></section></main>
+<footer><p><a href="terms.html">Terms of Service</a> &middot; <a href="privacy.html">Privacy Policy</a></p></footer>
+<script>
+var p = new URLSearchParams(location.search), t = document.getElementById("title"), m = document.getElementById("msg"), c = document.getElementById("copy");
+if (p.get("code")) {
+  t.textContent = "Account connected"; t.className = "ok";
+  m.textContent = "TikTok authorization received. The owner copies this link into the Creator Studio app on their own computer to finish connecting. This page stores nothing.";
+  c.style.display = "inline-block";
+  c.onclick = function () { navigator.clipboard.writeText(location.href).then(function () { c.textContent = "Copied"; }); };
+} else if (p.get("error")) {
+  t.textContent = "Authorization was not completed"; t.className = "warn";
+  m.textContent = (p.get("error_description") || p.get("error")) + ". You can go back and try again.";
+} else {
+  t.textContent = "Nothing to show"; m.textContent = "Open this page by connecting from the home page.";
+}
+</script></body></html>

@@ -30,10 +30,10 @@ h2{margin-top:0;font-size:20px}ol,ul{padding-left:22px}
 <footer><p><a href="terms.html">Terms of Service</a> &middot; <a href="privacy.html">Privacy Policy</a></p><p>Creator Studio &mdash; a personal project, not a commercial product or public service.</p></footer>
 <script>
 // TikTok client key is public (the client SECRET is never placed on this site).
-var CLIENT_KEY = "REPLACE_WITH_CLIENT_KEY";
+var CLIENT_KEY = "aw0r5zh9so69usev";
 var redirect = location.origin + location.pathname.replace(/[^\/]*$/, "") + "callback.html";
 var btn = document.getElementById("connect"), st = document.getElementById("status");
-if (CLIENT_KEY.indexOf("REPLACE") === 0) { btn.disabled = true; st.textContent = "Not configured yet."; }
+if (!CLIENT_KEY) { btn.disabled = true; st.textContent = "Not configured yet."; }
 btn.addEventListener("click", function () {
   var state = Math.random().toString(36).slice(2); sessionStorage.setItem("tt_state", state);
   location.href = "https://www.tiktok.com/v2/auth/authorize/?client_key=" + encodeURIComponent(CLIENT_KEY) +

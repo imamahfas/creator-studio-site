@@ -23,7 +23,10 @@
   to upload videos to the owner's own YouTube channel (the <code>youtube.upload</code> scope) and to
   read basic public statistics for videos it uploaded. When authorized with the owner's own Facebook
   account, it requests permission to publish Reels to the owner's own Facebook Page and to read
-  basic public insights for those posts.</p>
+  basic public insights for those posts. When authorized with the owner's own TikTok account (TikTok Login Kit and
+  Content Posting API, scope <code>video.upload</code>), it receives the account's basic profile information (display name and
+  open ID) and uploads the owner's own videos to that account's inbox as drafts. When the owner's Instagram professional
+  account is linked to the Facebook Page, it can also publish the owner's Reels to that account.</p>
 
   <p>The application does not request access to any other person's data, does not read private
   messages, contacts, or any data unrelated to the owner's own channel/Page content.</p>
@@ -36,7 +39,7 @@
   to any third party.</p>
 
   <h2>Data retention and revocation</h2>
-  <p>The owner may revoke the application's access at any time from their
+  <p>The owner may revoke the application's access at any time (in the TikTok app under Settings and privacy, Security and permissions, Apps and services) or from their
   <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions page</a>
   or their <a href="https://www.facebook.com/settings?tab=business_tools" target="_blank" rel="noopener">Facebook Business Integrations settings</a>,
   which immediately invalidates the stored tokens.</p>
